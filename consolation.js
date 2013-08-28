@@ -8,6 +8,7 @@ safe_console = {
   __args_to_array: function(args) { return Array.prototype.slice.call(args); },
   __caller_location: function() {
     var caller  = (new Error).stack.split("\n")[3];
+    // The strings! Oh, the horrifying strings!
     var cleaned = caller.split('/').pop().split(':').slice(0,2).join(':').replace(/\s+/gi, ' ').replace(' at ', '');
     return cleaned;
   }

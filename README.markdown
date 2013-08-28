@@ -29,6 +29,8 @@ Then paste the following (uncommented) in your browser's JS console.
 console.warn('hi there', {number: 9});
 ```
 
+That's pretty much it. If you're hungry for **still more** excitement, read the source code, you crazy adrenaline junky.
+
 ## If you hate it
 
 Try Ben Alman's better-known [Javascript Debug](http://benalman.com/projects/javascript-debug-console-log).
