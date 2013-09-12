@@ -7,10 +7,16 @@ safe_console = {
   })(),
   __args_to_array: function(args) { return Array.prototype.slice.call(args); },
   __caller_location: function() {
-    var caller  = (new Error).stack.split("\n")[3];
-    // The strings! Oh, the horrifying strings!
-    var cleaned = caller.split('/').pop().split(':').slice(0,2).join(':').replace(/\s+/gi, ' ').replace(' at ', '');
-    return cleaned;
+    var call_locations, current_position, caller, file_and_line;
+    try {
+    call_locations   = (new Error).stack.split("\n");
+    current_position = call_locations[0].match(/Error/) ? 3 : 2;
+    caller           = call_locations[current_position];
+    file_and_line    = caller.match(/\/([^\/]*$)/)[1];
+    } catch (err) {
+      file_and_line = 'location not supported by browser';
+    }
+    return file_and_line;
   }
 };
 
