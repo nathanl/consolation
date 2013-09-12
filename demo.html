@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Consolation Demo</title>
+    <script type="text/javascript" src="consolation.js"></script>
+    <script type="text/javascript">
+      console.enabled = true;
+
+      function go_beedogs_go() {
+        console.log('I heart beedogs', 42, {we: 'rock you', yes: function(){ return 'we do';}});
+      }
+
+      go_beedogs_go();
+
+      console.log('here we are in the top level...');
+    </script>
+  </head>
+  <body>
+    <h1>Consolation Is Loaded</h1>
+    <p>Knock yourself out.</p>
+  </body>
+</html>
+

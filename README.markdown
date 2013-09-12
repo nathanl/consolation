@@ -11,7 +11,7 @@ Tested and works in Chrome, Firefox and Safari. Chrome gives the nicest stack tr
 
 ## Try it out
 
-After including the JS file, paste the following in a file and include it on your page:
+Open the included `demo.html` in a browser, **or** after including `consolation.js` in your own page, paste in the following:
 
 ```javascript
 console.enabled = true;
@@ -25,7 +25,7 @@ go_beedogs_go();
 console.log('here we are in the top level...');
 ```
 
-Then paste the following (uncommented) in your browser's JS console.
+Then paste the following in your browser's JS console.
 
 ```javascript
 console.warn('hi there', {number: 9});
