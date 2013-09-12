@@ -1,4 +1,5 @@
 // A safer console object - see github.com/nathanl/consolation
+
 safe_console = {
   enabled: false,
   original_console: (function(){
@@ -23,27 +24,28 @@ safe_console = {
   }
 };
 
-(function(){
-  // Metaprogramming in JS! Wooooooooooooooo
+// Metaprogramming in JS! Wooooooooooooooo
+function add_console_methods(console_object, definer) {
   logging_methods = ['log', 'debug', 'info', 'error', 'warn'];
   methods         = ['dir', 'group', 'groupCollapsed', 'groupEnd', 'time', 'timeEnd', 'trace'].concat(logging_methods);
   for (i = 0; i < methods.length; i++) {
     method_name = methods[i];
-    (function(method_name){
-      safe_console[method_name] = function() {
-        if (!this.enabled) { return; }
-        var args = arguments;
-        // Tack on the caller location if this is a logging method
-        if (logging_methods.indexOf(method_name) !== -1) {
-          var called_from = this.__caller_location();
-          args            = this.__args_to_array(arguments).concat("(" + called_from + ")");
-        }
-        this.original_console[method_name].apply(this.original_console, args);
-      };
-    }
-    )(method_name);
+    definer(console_object, method_name);
   }
-})();
+}
+
+add_console_methods(safe_console, function(console_object, method_name){
+  console_object[method_name] = function() {
+    if (!this.enabled) { return; }
+    var args = arguments;
+    // Tack on the caller location if this is a logging method
+    if (logging_methods.indexOf(method_name) !== -1) {
+      var called_from = this.__caller_location();
+      args            = this.__args_to_array(arguments).concat("(" + called_from + ")");
+    }
+    this.original_console[method_name].apply(this.original_console, args);
+  };
+});
 
 // In case we missed any methods: inherit, regardless of `enabled` switch
 safe_console.__proto__ = safe_console.original_console;
