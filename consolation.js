@@ -1,12 +1,7 @@
 // A safer console object - see github.com/nathanl/consolation
-
 safe_console = {
   enabled: false,
-  original_console: (function(){
-    // If the browser has no usable one, define a no-op.
-    // TODO: metaprogram to add all supported methods, not just log, to this dummy console
-    return (typeof(window.console === 'object') && typeof(window.console.log) === 'function') ? window.console : {log: function(){}};
-  })(),
+  __no_op_console: {},
   __args_to_array: function(args) { return Array.prototype.slice.call(args); },
   __caller_location: function() {
     var call_locations, current_position, caller, file_and_line;
@@ -33,6 +28,17 @@ safe_console = {
   }
 };
 
+safe_console.original_console = (function(){
+  // If the browser has no usable console, use a no-op.
+  return (typeof(window.console === 'object') && typeof(window.console.log) === 'function') ? window.console : safe_console.__no_op_console;
+})();
+
+// Define all no-op methods for dummy console
+safe_console.__add_console_methods(safe_console.__no_op_console, function(console_object, method_name) {
+  console_object[method_name] = function() { return; };
+});
+
+// Define real logging methods for safe console
 safe_console.__add_console_methods(safe_console, function(console_object, method_name){
   console_object[method_name] = function() {
     if (!this.enabled) { return; }
