@@ -12,7 +12,9 @@ safe_console = {
     call_locations   = (new Error).stack.split("\n");
     current_position = call_locations[0].match(/Error/) ? 3 : 2;
     caller           = call_locations[current_position];
-    file_and_line    = caller.match(/\/([^\/]*$)/)[1];
+    // Match from either the last '/' or from '<anonymous>' to the end
+    file_and_line    = caller.match(/(\/([^\/]*)|\<anonymous\>.*)$/)[0];
+
     } catch (err) {
       file_and_line = 'location not supported by browser';
     }
