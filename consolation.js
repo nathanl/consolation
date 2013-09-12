@@ -28,8 +28,8 @@ safe_console = {
   }
 };
 
+// If the browser has no usable console, use a no-op.
 safe_console.original_console = (function(){
-  // If the browser has no usable console, use a no-op.
   return (typeof(window.console === 'object') && typeof(window.console.log) === 'function') ? window.console : safe_console.__no_op_console;
 })();
 
@@ -52,7 +52,7 @@ safe_console.__add_console_methods(safe_console, function(console_object, method
   };
 });
 
-// In case we missed any methods: inherit, regardless of `enabled` switch
+// In case we missed any methods, inherit from original console. (These would ignore the `enabled` switch)
 safe_console.__proto__ = safe_console.original_console;
 
 // Recklessly cautious!
