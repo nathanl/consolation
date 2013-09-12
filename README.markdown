@@ -7,6 +7,8 @@
 - Supports all console methods [documented by Mozilla](https://developer.mozilla.org/en-US/docs/Web/API/console)
 - If any console method was overlooked, it will be delegated to the original console object (bypassing the `enabled` check)
 
+Tested in Chrome, Firefox and Safari. Works best in Chrome.
+
 ## Try it out
 
 After including the JS file, paste the following in a file and include it on your page:
