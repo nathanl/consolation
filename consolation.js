@@ -21,20 +21,19 @@ safe_console = {
       file_and_line = 'location not supported by browser';
     }
     return file_and_line;
+  },
+  // Metaprogramming in JS! Wooooooooooooooo
+  __add_console_methods: function(console_object, definer) {
+    logging_methods = ['log', 'debug', 'info', 'error', 'warn'];
+    methods         = ['dir', 'group', 'groupCollapsed', 'groupEnd', 'time', 'timeEnd', 'trace'].concat(logging_methods);
+    for (i = 0; i < methods.length; i++) {
+      method_name = methods[i];
+      definer(console_object, method_name);
+    }
   }
 };
 
-// Metaprogramming in JS! Wooooooooooooooo
-function add_console_methods(console_object, definer) {
-  logging_methods = ['log', 'debug', 'info', 'error', 'warn'];
-  methods         = ['dir', 'group', 'groupCollapsed', 'groupEnd', 'time', 'timeEnd', 'trace'].concat(logging_methods);
-  for (i = 0; i < methods.length; i++) {
-    method_name = methods[i];
-    definer(console_object, method_name);
-  }
-}
-
-add_console_methods(safe_console, function(console_object, method_name){
+safe_console.__add_console_methods(safe_console, function(console_object, method_name){
   console_object[method_name] = function() {
     if (!this.enabled) { return; }
     var args = arguments;
