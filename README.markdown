@@ -9,6 +9,12 @@
 
 Tested and works in Chrome, Firefox and Safari. Chrome gives the nicest stack traces.
 
+## Giant Caveat
+
+This whole thing is a herculean effort to make things work nicely even if you leave `console.log` statements in your code and ship it to production.
+
+But probably you just shouldn't do that.
+
 ## Try it out
 
 Open the included `demo.html` in a browser, **or** after including `consolation.js` in your own page, paste in the following:
@@ -36,4 +42,3 @@ That's pretty much it. If you're hungry for **still more** excitement, read the 
 ## If you hate it
 
 Try Ben Alman's better-known [Javascript Debug](http://benalman.com/projects/javascript-debug-console-log).
-
