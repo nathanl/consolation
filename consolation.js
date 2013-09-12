@@ -21,7 +21,7 @@ safe_console = {
   __add_console_methods: function(console_object, definer) {
     logging_methods = ['log', 'debug', 'info', 'error', 'warn'];
     methods         = ['dir', 'group', 'groupCollapsed', 'groupEnd', 'time', 'timeEnd', 'trace'].concat(logging_methods);
-    for (i = 0; i < methods.length; i++) {
+    for (var i = 0; i < methods.length; i++) {
       method_name = methods[i];
       definer(console_object, method_name);
     }
