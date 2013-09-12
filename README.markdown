@@ -13,7 +13,9 @@ Tested and works in Chrome, Firefox and Safari. Chrome gives the nicest stack tr
 
 This whole thing is a herculean effort to make things work nicely even if you leave `console.log` statements in your code and ship it to production.
 
-But probably you just shouldn't do that.
+**But probably you just shouldn't do that.**
+
+(It was fun to write, though.)
 
 ## Try it out
 
