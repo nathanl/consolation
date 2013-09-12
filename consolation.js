@@ -2,7 +2,8 @@
 safe_console = {
   enabled: false,
   original_console: (function(){
-    // If the browser has no usable one, define a no-op
+    // If the browser has no usable one, define a no-op.
+    // TODO: metaprogram to add all supported methods, not just log, to this dummy console
     return (typeof(window.console === 'object') && typeof(window.console.log) === 'function') ? window.console : {log: function(){}};
   })(),
   __args_to_array: function(args) { return Array.prototype.slice.call(args); },
