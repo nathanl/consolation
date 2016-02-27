@@ -30,7 +30,7 @@ safe_console = {
 
 // If the browser has no usable console, use a no-op.
 safe_console.original_console = (function(){
-  return (typeof(window.console === 'object') && typeof(window.console.log) === 'function') ? window.console : safe_console.__no_op_console;
+  return (typeof(window.console) === 'object' && typeof(window.console.log) === 'function') ? window.console : safe_console.__no_op_console;
 })();
 
 // Define all no-op methods for dummy console
